@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jatin - Portfolio</title>
+    <link href="./Jatin - Portfolio_files/css2" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: linear-gradient(135deg, #0d0d2b, #1a1a4d);
+            overflow-x: hidden;
+            position: relative;
+            background-image: url('https://via.placeholder.com/1920x1080'); /* Replace with futuristic Sonipat cityscape */
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1%, transparent 15%) repeat;
+            animation: twinkle 6s infinite ease-in-out;
+            z-index: -1;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            perspective: 1000px;
+        }
+        header {
+            text-align: center;
+            padding: 50px 0;
+            animation: slideInDown 1s ease-out;
+        }
+        header h1 {
+            font-size: 3rem;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #00ffff;
+            animation: neonPulse 2s infinite alternate;
+        }
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 10px #ffcc00; }
+            to { text-shadow: 0 0 20px #ffcc00, 0 0 30px #00ffff; }
+        }
+        .profile-card {
+            width: 300px;
+            height: 400px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, #2a2a72, #1a1a3d);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 1s ease, box-shadow 1s ease;
+            position: relative;
+            animation: float 4s infinite ease-in-out;
+        }
+        .profile-card:hover {
+            transform: rotateY(20deg) scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(10deg); }
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transform: translateZ(30px);
+            transition: transform 1s ease;
+        }
+        .profile-card:hover .profile-img {
+            transform: translateZ(50px);
+        }
+        .section {
+            padding: 60px 20px;
+            background: rgba(26, 26, 77, 0.9);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(50px) perspective(1000px) rotateX(10deg);
+            animation: fadeInUp3D 1.2s ease-out forwards;
+            animation-delay: 0.2s;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        @keyframes fadeInUp3D {
+            from { opacity: 0; transform: translateY(50px) perspective(1000px) rotateX(10deg); }
+            to { opacity: 1; transform: translateY(0) perspective(1000px) rotateX(0deg); }
+        }
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffcc00; }
+            to { text-shadow: 0 0 20px #ffcc00, 0 0 5px #00ffff; }
+        }
+        .section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .skills-list li {
+            background: linear-gradient(45deg, #ff7f50, #ffcc00);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            list-style: none;
+            transform: scale(0);
+            animation: bounceIn 1s ease-out forwards;
+            animation-delay: calc(0.1s * var(--i));
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .skills-list li:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+            transition: box-shadow 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .contact-form button {
+            padding: 12px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .contact-form button:hover {
+            transform: scale(1.1);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #2c3e50, #3498db);
+            animation: slideInUp 1s ease-out;
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .profile-card { width: 250px; height: 330px; }
+            .section h2 { font-size: 2rem; }
+            .section p { font-size: 1rem; }
+            .contact-form { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Jatin - Portfolio</h1>
+            <div class="profile-card">
+                <img src="./Jatin - Portfolio_files/IMG-20250602-WA0010[1].jpg" alt="Jatin" class="profile-img">
+            </div>
+        </header>
+
+        <div class="section" id="about">
+            <h2>About Me</h2>
+            <p>Hi, I'm Jatin from Nayat, Sonipat. I'm a passionate learner currently pursuing an Artificial Intelligence course at Chhotu Ram Dham. I completed my 10th (84.4%) and 12th (75%) from Vivekanand Sr. Sec. School, Ishapur Kheri (HBSE Board). I love exploring technology and building creative solutions.</p>
+        </div>
+
+        <div class="section" id="skills">
+            <h2>My Skills</h2>
+            <ul class="skills-list">
+                <li style="--i: 1;">MS PowerPoint</li>
+                <li style="--i: 2;">MS Word</li>
+                <li style="--i: 3;">MS Excel</li>
+                <li style="--i: 4;">Basics of Computer</li>
+                <li style="--i: 5;">Uses of AI</li>
+                <li style="--i: 6;">HTML</li>
+                <li style="--i: 7;">CSS</li>
+            </ul>
+        </div>
+
+        <div class="section" id="goals">
+            <h2>My Long-Term Goals</h2>
+            <p>My primary goal is to succeed in a tech career by mastering Artificial Intelligence and web development. I aspire to innovate and create technologies that solve real-world problems, contributing to humanity's advancement. I also aim to mentor learners, build a startup, and leave a lasting impact in the tech industry.</p>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out for collaborations or inquiries!</p>
+            <form class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required="">
+                <input type="email" name="email" placeholder="Your Email" required="">
+                <textarea name="message" rows="5" placeholder="Your Message" required=""></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p>Phone: <a href="tel:9306239766">9306239766</a></p>
+            <p>Email: <a href="mailto:jatinmalik34568@gmail.com">jatinmalik34568@gmail.com</a></p>
+        </div>
+
+        <footer>
+            <p>© 2025 Jatin. All Rights Reserved.</p>
+        </footer>
+    </div>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
