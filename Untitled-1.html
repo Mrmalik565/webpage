@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win91 - India's No.1 Gaming Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 15px;
+            background: linear-gradient(90deg, #ff1e1e, #d81b1b);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.7);
+            flex-wrap: wrap;
+        }
+        .header h1 {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+        }
+        .wallet {
+            background: #28a745;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .nav button {
+            padding: 8px 15px;
+            background: #ffd700;
+            border: none;
+            color: #000;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .banner {
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAcD/AAAAAQAAAP8AAAD/AAAAAAAACklEQVR4nGNgYAAAAABAAQAAAP8AAAAA') center/cover;
+            height: 130px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 20px;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            background: #1c1c1c;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 0 5px rgba(0,0,0,0.6);
+        }
+        .tab-button {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #2a2a2a, #3a3a3a);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+            margin: 0 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tab-button.active, .tab-button:hover {
+            background: linear-gradient(90deg, #ff1e1e, #d81b1b);
+            transform: scale(1.03);
+            box-shadow: 0 0 10px rgba(255, 30, 30, 0.5);
+        }
+        .tab-content {
+            display: none;
+            background: #1c1c1c;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .game-tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .game-tile {
+            background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .game-tile:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .game-tile img {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ffd700;
+        }
+        .game-tile h3 {
+            color: #ffd700;
+            font-size: 13px;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+        .controls {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .controls input, .controls select, .controls button {
+            padding: 8px;
+            width: 150px;
+            margin: 5px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #2a2a2a, #3a3a3a);
+            color: #fff;
+            border: none;
+            font-size: 13px;
+        }
+        .controls button {
+            background: linear-gradient(90deg, #28a745, #218838);
+            cursor: pointer;
+        }
+        .controls button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+        }
+        .controls button:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+        .color-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .color-buttons button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid #ffd700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .color-buttons button:hover {
+            transform: scale(1.1);
+        }
+        .timer {
+            font-size: 20px;
+            color: #ffd700;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        canvas {
+            border: 2px solid #ffd700;
+            background: #000;
+            border-radius: 8px;
+            margin: 10px auto;
+            display: block;
+        }
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .slot-reel {
+            width: 65px;
+            height: 65px;
+            background: #2a2a2a;
+            border: 2px solid #ffd700;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            animation: spin 0.5s linear;
+        }
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+        .mines-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            gap: 5px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .mine-tile {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            border: 1px solid #ffd700;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .mine-tile.revealed {
+            background: #28a745;
+        }
+        .mine-tile.bomb {
+            background: #ff4d4d;
+        }
+        .result, #multiplier, #status {
+            font-size: 16px;
+            text-align: center;
+            color: #ffd700;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1c1c1c, #2a2a2a);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+            z-index: 1000;
+            border: 1px solid #ffd700;
+        }
+        .popup input, .popup button {
+            padding: 8px;
+            width: 170px;
+            margin: 5px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .popup input {
+            background: #2a2a2a;
+            color: #fff;
+            border: 1px solid #ffd700;
+        }
+        .popup button {
+            background: linear-gradient(90deg, #28a745, #218838);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            transform: scale(1.03);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 999;
+        }
+        .game-history, .leaderboard {
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .referral-section {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .referral-section input {
+            width: 80%;
+            max-width: 280px;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 8px; }
+            .game-tiles { grid-template-columns: 1fr; }
+            .controls input, .controls select, .controls button { width: 100%; }
+            .header { flex-direction: column; gap: 8px; }
+            canvas { width: 100%; height: auto; }
+            .slot-machine, .color-buttons { flex-direction: column; gap: 5px; }
+            .tabs { padding: 5px; }
+            .mines-grid { grid-template-columns: repeat(5, 40px); }
+            .mine-tile { width: 40px; height: 40px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="login-popup">
+        <h2>Login</h2>
+        <input type="text" id="login-mobile" placeholder="Mobile Number" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <button onclick="showPopup('register')">Go to Register</button>
+    </div>
+    <div class="popup" id="register-popup">
+        <h2>Register</h2>
+        <input type="text" id="register-mobile" placeholder="Mobile Number" required>
+        <input type="password" id="register-password" placeholder="Password" required>
+        <input type="text" id="register-invite" placeholder="Invite Code (Optional)">
+        <button onclick="register()">Register</button>
+        <button onclick="showPopup('login')">Go to Login</button>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Win91</h1>
+            <div class="wallet" id="wallet">Wallet: ₹0</div>
+            <div class="nav" id="nav">
+                <button onclick="showPopup('login')">Login</button>
+                <button onclick="showPopup('register')">Register</button>
+            </div>
+        </div>
+        <div class="banner">
+            <h2>Win91: ₹100 Bonus + 500% Deposit!</h2>
+        </div>
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('home')" aria-label="Home Tab">Home</button>
+            <button class="tab-button" onclick="openTab('games')" aria-label="Games Tab">Games</button>
+            <button class="tab-button" onclick="openTab('finance')" aria-label="Finance Tab">Finance</button>
+            <button class="tab-button" onclick="openTab('promotions')" aria-label="Promotions Tab">Promotions</button>
+            <button class="tab-button" onclick="openTab('referral')" aria-label="Referral Tab">Referral</button>
+        </div>
+        <div id="home" class="tab-content active">
+            <div class="game-tiles">
+                <div class="game-tile" onclick="openTab('games', 'wingo')">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAcD/AAAAAQAAAP8AAAD/AAAAAAAACklEQVR4nGNgYAAAAABAAQAAAP8AAAAA" alt="WinGo">
+                    <h3>WinGo</h3>
+                </div>
+                <div class="game-tile" onclick="openTab('games', 'aviator')">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAcD/AAAAAQAAAP8AAAD/AAAAAAAACklEQVR4nGNgYAAAAABAAQAAAP8AAAAA" alt="Aviator">
+                    <h3>Aviator</h3>
+                </div>
+                <div class="game-tile" onclick="openTab('games', 'slots')">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAcD/AAAAAQAAAP8AAAD/AAAAAAAACklEQVR4nGNgYAAAAABAAQAAAP8AAAAA" alt="Slots">
+                    <h3>Slots</h3>
+                </div>
+                <div class="game-tile" onclick="openTab('games', 'mines')">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAcD/AAAAAQAAAP8AAAD/AAAAAAAACklEQVR4nGNgYAAAAABAAQAAAP8AAAAA" alt="Mines">
+                    <h3>Mines</h3>
+                </div>
+                <div class="game-tile" onclick="openTab('games', 'lottery')">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAcD/AAAAAQAAAP8AAAD/AAAAAAAACklEQVR4nGNgYAAAAABAAQAAAP8AAAAA" alt="Lottery">
+                    <h3>Lottery</h3>
+                </div>
+            </div>
+            <div class="game-history">
+                <h3>Recent Results</h3>
+                <div id="game-history">No games played yet.</div>
+            </div>
+            <div class="leaderboard">
+                <h3>Top Players</h3>
+                <div id="leaderboard">1. Player1: ₹10,000<br>2. Player2: ₹8,000<br>3. Player3: ₹5,000</div>
+            </div>
+        </div>
+        <div id="games" class="tab-content">
+            <div id="wingo" class="game-content active">
+                <div class="timer" id="wingo-timer">00:00</div>
+                <div class="result" id="wingo-result">Select a color or number!</div>
+                <div class="controls">
+                    <select id="wingoTime">
+                        <option value="60">1 Min</option>
+                        <option value="180">3 Min</option>
+                        <option value="300">5 Min</option>
+                    </select>
+                    <input type="number" id="wingoBet" placeholder="Bet (INR)" min="10" value="10">
+                    <div class="color-buttons">
+                        <button style="background-color: #ff4d4d;" onclick="placeWingoBet('red')">Red</button>
+                        <button style="background-color: #28a745;" onclick="placeWingoBet('green')">Green</button>
+                        <button style="background-color: #800080;" onclick="placeWingoBet('violet')">Violet</button>
+                        <button style="background-color: #ffd700;" onclick="placeWingoBet('0')">0</button>
+                        <button style="background-color: #fff;" onclick="placeWingoBet('1-9')">1-9</button>
+                    </div>
+                </div>
+            </div>
+            <div id="aviator" class="game-content">
+                <canvas id="aviatorCanvas" width="400" height="200"></canvas>
+                <div id="multiplier">Multiplier: 1.00x</div>
+                <div id="status">Place your bet to start!</div>
+                <div class="controls">
+                    <input type="number" id="aviatorBet" placeholder="Bet (INR)" min="10" value="10">
+                    <button id="aviatorBetButton" onclick="placeAviatorBet()">Place Bet</button>
+                    <button id="aviatorCashOut" onclick="aviatorCashOut()" disabled>Cash Out</button>
+                </div>
+            </div>
+            <div id="slots" class="game-content">
+                <div class="result" id="slots-result">Spin to win!</div>
+                <div class="slot-machine" id="slotMachine">
+                    <div class="slot-reel">🍒</div>
+                    <div class="slot-reel">🍋</div>
+                    <div class="slot-reel">⭐</div>
+                </div>
+                <div class="controls">
+                    <input type="number" id="slotsBet" placeholder="Bet (INR)" min="10" value="10">
+                    <button onclick="spinSlots()">Spin</button>
+                </div>
+            </div>
+            <div id="mines" class="game-content">
+                <div class="result" id="mines-result">Click tiles to reveal rewards!</div>
+                <div class="controls">
+                    <input type="number" id="minesBet" placeholder="Bet (INR)" min="10" value="10">
+                    <button onclick="startMinesGame()">Start Game</button>
+                </div>
+                <div class="mines-grid" id="minesGrid"></div>
+            </div>
+            <div id="lottery" class="game-content">
+                <div class="result" id="lottery-result">Buy a ticket!</div>
+                <div class="controls">
+                    <input type="number" id="lotteryNumber" placeholder="Pick Number (1-100)" min="1" max="100">
+                    <input type="number" id="lotteryBet" placeholder="Bet (INR)" min="10" value="10">
+                    <button onclick="playLottery()">Buy Ticket</button>
+                </div>
+            </div>
+        </div>
+        <div id="finance" class="tab-content">
+            <div class="controls">
+                <h3>Deposit</h3>
+                <select id="depositMethod">
+                    <option value="upi">UPI</option>
+                    <option value="paytm">Paytm</option>
+                    <option value="bank">Bank Transfer</option>
+                </select>
+                <input type="number" id="depositAmount" placeholder="Amount (INR)" min="100">
+                <button onclick="processDeposit()">Deposit</button>
+            </div>
+            <div class="controls">
+                <h3>Withdrawal</h3>
+                <input type="number" id="withdrawalAmount" placeholder="Amount (INR)" min="100">
+                <button onclick="processWithdrawal()">Withdraw</button>
+            </div>
+        </div>
+        <div id="promotions" class="tab-content">
+            <h3>Promotions</h3>
+            <p>₹100 Signup Bonus<br>500% First Deposit Bonus (up to ₹10,000)<br>₹100 per Referral<br>Daily Login Bonus: ₹50</p>
+        </div>
+        <div id="referral" class="tab-content">
+            <div class="referral-section">
+                <h3>Invite Friends</h3>
+                <p>Earn ₹100 per friend who joins with your code!</p>
+                <input type="text" id="inviteLink" value="win91.com/invite?code=12345" readonly>
+                <button onclick="copyInviteLink()">Copy Link</button>
+            </div>
+        </div>
+    </div>
+    <audio id="betSound" src="data:audio/mpeg;base64,/+MYxAAAAANIAUAAAASEEB/jwOFM/0MM/90b/+RhST//w4NFwQAgj/cAAAAAAA//+MYxDsAAABWI0Am4AAGfngAE6//xn0C//x8d//4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4qO/4q
